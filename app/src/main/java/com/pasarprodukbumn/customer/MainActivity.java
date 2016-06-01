@@ -1,6 +1,9 @@
 package com.pasarprodukbumn.customer;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,9 +17,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    RelativeLayout menuLogin, menuHome, menuKategori, menuPesawat, menuHubungiKami, menuTentang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +38,9 @@ public class MainActivity extends AppCompatActivity
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webView.loadUrl("http://v1.pasarprodukbumn.com/");
+        webView.loadUrl("http://www.pasarprodukbumn.com/");
 
-        // Button
+        // Button / Menu
         LinearLayout menuButton = (LinearLayout)findViewById(R.id.layout_click_sidebar);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +49,34 @@ public class MainActivity extends AppCompatActivity
                 drawer.openDrawer(GravityCompat.START);
             }
         });
+
+        View menuHeader = navigationView.inflateHeaderView(R.layout.nav_header_main);
+
+        menuLogin = (RelativeLayout)menuHeader.findViewById(R.id.menuLogin);
+        menuHome = (RelativeLayout)menuHeader.findViewById(R.id.menuHome);
+        menuKategori = (RelativeLayout)menuHeader.findViewById(R.id.menuKategori);
+        menuPesawat = (RelativeLayout)menuHeader.findViewById(R.id.menuPesawat);
+        menuHubungiKami = (RelativeLayout)menuHeader.findViewById(R.id.menuHubungiKami);
+        menuTentang = (RelativeLayout)menuHeader.findViewById(R.id.menuTentang);
+
+        menuLogin.setOnClickListener(this);
+        menuHome.setOnClickListener(this);
+        menuKategori.setOnClickListener(this);
+        menuPesawat.setOnClickListener(this);
+        menuHubungiKami.setOnClickListener(this);
+        menuTentang.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
+        Log.i("LOG", "Clickes ");
     }
 
     private class MyBrowser extends WebViewClient {
@@ -66,7 +100,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
+
+
+
+
         return true;
     }
 
@@ -91,22 +129,23 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+
+
     }
 }

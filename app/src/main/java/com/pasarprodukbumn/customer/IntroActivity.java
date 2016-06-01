@@ -14,10 +14,9 @@ public class IntroActivity extends AppIntro {
 
         // Add your slide's fragments here.
         // AppIntro will automatically generate the dots indicator and buttons.
-        addSlide(IntroSlide.newInstance(R.layout.intro));
-        addSlide(IntroSlide.newInstance(R.layout.intro));
-        addSlide(IntroSlide.newInstance(R.layout.intro));
-        addSlide(IntroSlide.newInstance(R.layout.intro));
+        addSlide(IntroSlide.newInstance(R.layout.intro_1));
+        addSlide(IntroSlide.newInstance(R.layout.intro_2));
+        addSlide(IntroSlide.newInstance(R.layout.intro_3));
 
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
@@ -25,8 +24,8 @@ public class IntroActivity extends AppIntro {
 
         // OPTIONAL METHODS
         // Override bar/separator color.
-        setBarColor(Color.parseColor("#3F51B5"));
-        setSeparatorColor(Color.parseColor("#2196F3"));
+        setBarColor(getResources().getColor(R.color.colorPrimary));
+        setSeparatorColor(getResources().getColor(R.color.colorAccent));
 
         // Hide Skip/Done button.
         showSkipButton(true);
