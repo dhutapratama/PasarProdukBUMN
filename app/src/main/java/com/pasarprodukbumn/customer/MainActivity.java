@@ -1,5 +1,6 @@
 package com.pasarprodukbumn.customer;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     RelativeLayout menuLogin, menuHome, menuKategori, menuPesawat, menuHubungiKami, menuTentang;
+    WebView webView;
+    ProgressDialog mLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +36,17 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // MySelf
-        WebView webView =(WebView)findViewById(R.id.webView);
+        webView =(WebView)findViewById(R.id.webView);
         webView.setWebViewClient(new MyBrowser());
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.loadUrl("http://www.pasarprodukbumn.com/");
+        webView.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                mLoading.dismiss();
+            }
+        });
 
         // Button / Menu
         LinearLayout menuButton = (LinearLayout)findViewById(R.id.layout_click_sidebar);
@@ -65,6 +73,10 @@ public class MainActivity extends AppCompatActivity
         menuPesawat.setOnClickListener(this);
         menuHubungiKami.setOnClickListener(this);
         menuTentang.setOnClickListener(this);
+
+        mLoading = new ProgressDialog(this);
+        mLoading.setMessage("Tunggu Sebentar");
+        mLoading.show();
     }
 
     @Override
@@ -72,11 +84,26 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
 
-        Log.i("LOG", "Clickes ");
+        if(v.getId() == R.id.menuLogin) {
+            webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=auth.login_form&return_url=index.php");
+            mLoading.show();
+        } else if(v.getId() == R.id.menuHome) {
+            webView.loadUrl("http://www.pasarprodukbumn.com/");
+            mLoading.show();
+        } else if(v.getId() == R.id.menuKategori) {
+
+        } else if(v.getId() == R.id.menuPesawat) {
+            webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=tiket.garuda");
+            mLoading.show();
+        } else if(v.getId() == R.id.menuHubungiKami) {
+            webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=pages.view&page_id=30");
+            mLoading.show();
+        } else if(v.getId() == R.id.menuTentang) {
+            webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=pages.view&page_id=2");
+            mLoading.show();
+        }
     }
 
     private class MyBrowser extends WebViewClient {
@@ -143,9 +170,5 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-
-
-
-
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:layout_gravity="center_horizontal"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:id="@+id/action_bar_back"
     android:background="@color/colorWhite"
     android:layout_width="fill_parent"
@@ -40,19 +40,10 @@
                 android:layout_centerInParent="true"
                 android:scaleX="0.85"
                 android:scaleY="0.85" />
-            <RelativeLayout android:gravity="center"
-                android:orientation="horizontal"
-                android:id="@+id/layout_click_cart"
-                android:background="@drawable/hover_selector_home"
-                android:layout_width="50.0dip"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10.0dip" android:layout_alignParentRight="true"
-                android:paddingTop="5dp">
-                <ImageView android:gravity="center" android:layout_gravity="center_vertical" android:id="@+id/action_cart_product_detail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="7.0dip" android:src="@drawable/assets_bag_blue" android:layout_alignParentLeft="true" android:scaleX="0.65" android:scaleY="0.65" />
-                <RelativeLayout android:gravity="center" android:orientation="vertical" android:id="@+id/circle_total_cart" android:background="@drawable/circle_notif" android:visibility="gone" android:layout_width="@dimen/circle_cart_size" android:layout_height="@dimen/circle_cart_size" android:layout_marginTop="5.0dip" android:layout_alignParentRight="true">
-                    <TextView android:textSize="@dimen/text_total_cart" android:textColor="#ffffffff" android:gravity="center" android:id="@+id/tv_total_cart" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="10" />
-                </RelativeLayout>
-            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"></View>
 </LinearLayout>
