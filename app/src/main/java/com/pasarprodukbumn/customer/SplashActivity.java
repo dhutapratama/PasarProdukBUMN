@@ -11,6 +11,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        DatabaseSQL.getInitialData(this);
+
         Thread timer = new Thread()
         {
             public void run() {
@@ -22,8 +24,15 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 finally
                 {
-                    Intent intent = new Intent(SplashActivity.this, IntroActivity.class);
-                    startActivity(intent);
+                    if (Globals.FIRST_LAUNCH.equals("1")) {
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        DatabaseSQL.updateSQLData(SplashActivity.this, "first_launch", "1");
+                        Intent intent = new Intent(SplashActivity.this, IntroActivity.class);
+                        startActivity(intent);
+                    }
+
                 }
             }
         };
