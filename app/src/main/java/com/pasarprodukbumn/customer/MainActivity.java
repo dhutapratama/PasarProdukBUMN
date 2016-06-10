@@ -1,23 +1,16 @@
 package com.pasarprodukbumn.customer;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -27,12 +20,15 @@ public class MainActivity extends AppCompatActivity
 
     RelativeLayout menuLogin, menuHome, menuKategori, menuPesawat, menuHubungiKami, menuTentang;
     WebView webView;
+    String mobile, desktop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mobile = "Mozilla/5.0 (Linux; U; Android 4.4.4; en-us; 2014817 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/42.0.0.0 Mobile Safari/537.36";
+        desktop = "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0";
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -79,13 +75,17 @@ public class MainActivity extends AppCompatActivity
         }
 
         if(v.getId() == R.id.menuLogin) {
+            webView.getSettings().setUserAgentString(mobile);
             webView.loadUrl("http://pasarprodukbumn.com/#/profile");
         } else if(v.getId() == R.id.menuHome) {
+            webView.getSettings().setUserAgentString(mobile);
             webView.loadUrl("http://www.pasarprodukbumn.com/");
         } else if(v.getId() == R.id.menuKategori) {
+            webView.getSettings().setUserAgentString(mobile);
             webView.loadUrl("http://pasarprodukbumn.com/#/category/0");
         } else if(v.getId() == R.id.menuPesawat) {
-            Toast.makeText(this, "Maaf Tiket Pesawat tidak aktif", Toast.LENGTH_LONG).show();
+            webView.getSettings().setUserAgentString(desktop);
+            webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=tiket.garuda");
         } else if(v.getId() == R.id.menuHubungiKami) {
             Intent intent = new Intent(this, ContactActivity.class);
             startActivity(intent);
