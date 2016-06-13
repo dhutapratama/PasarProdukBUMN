@@ -13,7 +13,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -40,6 +39,12 @@ public class MainActivity extends AppCompatActivity
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.loadUrl("http://www.pasarprodukbumn.com/");
 
+        Intent intent = getIntent();
+        String url = intent.getStringExtra("url");
+        if (url != null) {
+            webView.loadUrl(url);
+        }
+
         // Button / Menu
         LinearLayout menuButton = (LinearLayout)findViewById(R.id.layout_click_sidebar);
         menuButton.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +70,8 @@ public class MainActivity extends AppCompatActivity
         menuPesawat.setOnClickListener(this);
         menuHubungiKami.setOnClickListener(this);
         menuTentang.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -81,8 +88,10 @@ public class MainActivity extends AppCompatActivity
             webView.getSettings().setUserAgentString(mobile);
             webView.loadUrl("http://www.pasarprodukbumn.com/");
         } else if(v.getId() == R.id.menuKategori) {
-            webView.getSettings().setUserAgentString(mobile);
-            webView.loadUrl("http://pasarprodukbumn.com/#/category/0");
+            //webView.getSettings().setUserAgentString(mobile);
+            //webView.loadUrl("http://pasarprodukbumn.com/#/category/0");
+            Intent intent = new Intent(MainActivity.this, KategoriActivity.class);
+            startActivity(intent);
         } else if(v.getId() == R.id.menuPesawat) {
             webView.getSettings().setUserAgentString(desktop);
             webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=tiket.garuda");
@@ -117,9 +126,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.main, menu);
-
-
-
 
         return true;
     }
