@@ -1,6 +1,8 @@
 package com.pasarprodukbumn.customer;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity
     RelativeLayout menuLogin, menuHome, menuKategori, menuPesawat, menuHubungiKami, menuTentang;
     WebView webView;
     String mobile, desktop;
+    Dialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        loading = Dialogs.loading(this);
+
         // MySelf
         webView =(WebView)findViewById(R.id.webView);
         webView.setWebViewClient(new MyBrowser());
@@ -38,6 +43,20 @@ public class MainActivity extends AppCompatActivity
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.loadUrl("http://www.pasarprodukbumn.com/");
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                loading.show();
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                loading.dismiss();
+            }
+
+        });
 
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
@@ -83,7 +102,7 @@ public class MainActivity extends AppCompatActivity
 
         if(v.getId() == R.id.menuLogin) {
             webView.getSettings().setUserAgentString(mobile);
-            webView.loadUrl("http://pasarprodukbumn.com/#/profile");
+            webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=auth.login_form");
         } else if(v.getId() == R.id.menuHome) {
             webView.getSettings().setUserAgentString(mobile);
             webView.loadUrl("http://www.pasarprodukbumn.com/");
