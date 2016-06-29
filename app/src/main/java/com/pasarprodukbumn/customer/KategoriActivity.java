@@ -33,16 +33,16 @@ public class KategoriActivity extends AppCompatActivity {
         };
 
         final String[] address = new String[] {
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=278",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=166",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=279",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=297",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=298",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=299",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=303",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=306",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=274",
-                "http://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=277"
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=278",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=166",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=279",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=297",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=298",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=299",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=303",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=306",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=274",
+                "https://pasarprodukbumn.com/index.php?dispatch=categories.view&category_id=277"
         };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,

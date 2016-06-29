@@ -12,6 +12,14 @@ public class IntroActivity extends AppIntro {
     @Override
     public void init(Bundle savedInstanceState) {
 
+        DatabaseSQL.getInitialData(this);
+        if (Globals.FIRST_LAUNCH.equals("1")) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            DatabaseSQL.updateSQLData(this, "first_launch", "1");
+        }
+
         // Add your slide's fragments here.
         // AppIntro will automatically generate the dots indicator and buttons.
         addSlide(IntroSlide.newInstance(R.layout.intro_1));

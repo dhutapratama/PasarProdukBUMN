@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 
         mobile = "Mozilla/5.0 (Linux; U; Android 4.4.4; en-us; 2014817 Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/42.0.0.0 Mobile Safari/537.36";
         desktop = "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0";
+        mobile = desktop;
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webView.loadUrl("http://www.pasarprodukbumn.com/");
+        webView.loadUrl("https://www.pasarprodukbumn.com/");
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -102,10 +103,10 @@ public class MainActivity extends AppCompatActivity
 
         if(v.getId() == R.id.menuLogin) {
             webView.getSettings().setUserAgentString(mobile);
-            webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=auth.login_form");
+            webView.loadUrl("https://pasarprodukbumn.com/index.php?dispatch=auth.login_form");
         } else if(v.getId() == R.id.menuHome) {
             webView.getSettings().setUserAgentString(mobile);
-            webView.loadUrl("http://www.pasarprodukbumn.com/");
+            webView.loadUrl("https://www.pasarprodukbumn.com/");
         } else if(v.getId() == R.id.menuKategori) {
             //webView.getSettings().setUserAgentString(mobile);
             //webView.loadUrl("http://pasarprodukbumn.com/#/category/0");
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if(v.getId() == R.id.menuPesawat) {
             webView.getSettings().setUserAgentString(desktop);
-            webView.loadUrl("http://pasarprodukbumn.com/index.php?dispatch=tiket.garuda");
+            webView.loadUrl("https://pasarprodukbumn.com/index.php?dispatch=tiket.garuda");
         } else if(v.getId() == R.id.menuHubungiKami) {
             Intent intent = new Intent(this, ContactActivity.class);
             startActivity(intent);
